@@ -1,0 +1,1 @@
+<PackageReference Include="MSOffice.Interop" Version="16.0.55555" />
