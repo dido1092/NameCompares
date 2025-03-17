@@ -19,6 +19,7 @@ namespace NameCompares
         public DbSet<EnBgMatchesWords>? EnBgMatchesWords { get; set; }
         public DbSet<ResultTable>? ResultTables { get; set; }
         public DbSet<LettRelations>? LettRelations { get; set; }
+        public DbSet<WordTable>? WordTables { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -28,9 +29,21 @@ namespace NameCompares
                 .HasForeignKey(e => e.LettRelationsId)
                 .IsRequired();
 
+            modelBuilder.Entity<LettRelations>()
+                .HasMany(e => e.WordTables)
+                .WithOne(e => e.LettRelations)
+                .HasForeignKey(e => e.LettRelationsId)
+                .IsRequired();
+
             modelBuilder.Entity<ResultTable>()
                 .HasOne(e => e.LettRelations)
                 .WithMany(e => e.Results)
+                .HasForeignKey(e => e.LettRelationsId)
+                .IsRequired();
+
+            modelBuilder.Entity<WordTable>()
+                .HasOne(e => e.LettRelations)
+                .WithMany(e => e.WordTables)
                 .HasForeignKey(e => e.LettRelationsId)
                 .IsRequired();
         }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NameCompares;
 
@@ -11,9 +12,10 @@ using NameCompares;
 namespace NameCompares.Migrations
 {
     [DbContext(typeof(NameComparesContext))]
-    partial class NameComparesContextModelSnapshot : ModelSnapshot
+    [Migration("20250305185314_AddNewTableWords")]
+    partial class AddNewTableWords
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
