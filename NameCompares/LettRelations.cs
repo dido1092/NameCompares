@@ -13,6 +13,7 @@ namespace NameCompares
         {
             this.Results = new List<ResultTable>(); 
         }
+
         [Key]
         public int Id { get; set; }
 
@@ -26,5 +27,8 @@ namespace NameCompares
         public DateTime DateTime { get; set; }
 
         public ICollection<ResultTable> Results { get; set; }
+        public ICollection<WordTable> WordTables { get; set; }
+
+
     }
 }

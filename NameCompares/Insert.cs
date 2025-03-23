@@ -399,9 +399,10 @@ namespace NameCompares
             char[] arrEnLetters = { 'A', 'a', 'B', 'b', 'C', 'c', 'D', 'd', 'E', 'e', 'F', 'f', 'G', 'g', 'H', 'h', 'I', 'i', 'J', 'j', 'K', 'k', 'L', 'l', 'M', 'm', 'N', 'n', 'O', 'o', 'P', 'p', 'Q', 'q', 'R', 'r', 'S', 's', 'T', 't', 'U', 'u', 'V', 'v', 'W', 'w', 'X', 'x', 'Y', 'y', 'Z', 'z' };
             //char[] arrBgLetters = { 'А', 'а', 'Б', 'б', 'С', 'с', 'Д', 'д', 'Е', 'е', 'Ф', 'ф', 'Г', 'г', 'Н', 'н', 'И', 'и', 'Ж', 'ж', 'К', 'к', 'Л', 'л', 'М', 'м', 'Н', 'н', 'О', 'о', 'Р', 'р', 'Q', 'q', 'R', 'r', 'S', 's', 'Т', 'т', 'U', 'u', 'V', 'v', 'W', 'w', 'Х', 'х', 'У', 'у', 'З', 'з' };
             string word = string.Empty;
-            string currentWord = string.Empty;
-            bool isEqualLength = false;
+            //string currentWord = string.Empty;
+            //bool isEqualLength = false;
             string wordWithoutSpecialSymbols = string.Empty;
+            var getEnWords = context.EnNames?.Select(w => w.EnName).ToHashSet();
 
             string[] lines = System.IO.File.ReadAllLines(textBoxInsertDest.Text.ToUpper());
 
@@ -412,44 +413,61 @@ namespace NameCompares
                 foreach (var line in lines)
                 {
                     //string[] allNamesInLine = line.Split(' ', '.', ',', '\r', '\t', '!', '?', '"', '—', '-', '\u0092', '/', '„', '“', ':', '(', ')', ';', '«', '»', '=', '~', '♦', '•', '©', '®', '[', ']', '&', '‘', '”', '{', '}', '^', '#');//Split(' ', line.Length, StringSplitOptions.RemoveEmptyEntries)
-                    string[] allNamesInLine = line.Split(',');//Split(' ', line.Length, StringSplitOptions.RemoveEmptyEntries)
+                    //string[] allNamesInLine = line.Split(',');//Split(' ', line.Length, StringSplitOptions.RemoveEmptyEntries)
+                    string[] allNamesInLine = line.Split('/', ' ');//Split(' ', line.Length, StringSplitOptions.RemoveEmptyEntries)
 
-                    for (int i = 0; i < allNamesInLine.Length; i++)
+                    word = allNamesInLine[0].ToUpper();
+
+                    if (word != "")
                     {
-                        word = allNamesInLine[i].ToUpper();
-
-                        if (word != "")
+                        if (word.Length > 1)
                         {
-                            wordWithoutSpecialSymbols = string.Empty;
-                            isEqualLength = false;
-
-                            for (int j = 0; j < word.Length; j++)
+                            if (!getEnWords!.Contains(word))
                             {
-                                char letter = word[j];
+                                //BgWords bgWords = new BgWords();
 
-                                for (int k = 0; k < arrEnLetters.Length; k++)
-                                {
-                                    if (letter == arrEnLetters[k])
-                                    {
-                                        wordWithoutSpecialSymbols += letter;
-                                    }
-                                    if (wordWithoutSpecialSymbols.Length == word.Length)
-                                    {
-                                        isEqualLength = true;
-                                        break;
-                                    }
-                                }
-                                if (isEqualLength)
-                                {
-                                    break;
-                                }
+                                //bgWords.BgWord = currentWord;
+
+                                hsEnWords.Add(word!);
                             }
                         }
-                        if (wordWithoutSpecialSymbols != null && wordWithoutSpecialSymbols != "" && !getWorldNames.Contains(wordWithoutSpecialSymbols))
-                        {
-                            hsEnWords.Add(wordWithoutSpecialSymbols!);
-                        }
                     }
+                    //for (int i = 0; i < allNamesInLine.Length; i++)
+                    //{
+                    //    word = allNamesInLine[i].ToUpper();
+
+                    //    if (word != "")
+                    //    {
+                    //        wordWithoutSpecialSymbols = string.Empty;
+                    //        isEqualLength = false;
+
+                    //        for (int j = 0; j < word.Length; j++)
+                    //        {
+                    //            char letter = word[j];
+
+                    //            for (int k = 0; k < arrEnLetters.Length; k++)
+                    //            {
+                    //                if (letter == arrEnLetters[k])
+                    //                {
+                    //                    wordWithoutSpecialSymbols += letter;
+                    //                }
+                    //                if (wordWithoutSpecialSymbols.Length == word.Length)
+                    //                {
+                    //                    isEqualLength = true;
+                    //                    break;
+                    //                }
+                    //            }
+                    //            if (isEqualLength)
+                    //            {
+                    //                break;
+                    //            }
+                    //        }
+                    //    }
+                    //    if (wordWithoutSpecialSymbols != null && wordWithoutSpecialSymbols != "" && !getWorldNames.Contains(wordWithoutSpecialSymbols))
+                    //    {
+                    //        hsEnWords.Add(wordWithoutSpecialSymbols!);
+                    //    }
+                    //}
                 }
             }
 
@@ -503,7 +521,10 @@ namespace NameCompares
                     Type = "",
                     DateTime = new DateTime(src.Year, src.Month, src.Day, src.Hour, src.Minute, 0),
                 };
+
                 context.LatWords!.Add(nLat);
+
+                progressBarInsert.Value++;
             }
 
             //foreach (var latName in hsLatNames)

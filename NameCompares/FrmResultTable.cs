@@ -123,13 +123,13 @@ namespace NameCompares
             //savefile.FileName = "";
             //savefile.Filter = "Excel Files(2003)|*.xls| Excel Files(2007)|*.xlsx";
 
-            string newDirectoryPath = string.Empty;
-            newDirectoryPath = Save(newDirectoryPath);
+            //string newDirectoryPath = string.Empty;
 
+            Save();
 
             MessageBox.Show("Done!");
         }
-        private string Save(string newDirectoryPath)
+        private void Save()
         {
             SaveFileDialog savefile = new SaveFileDialog();
             savefile.RestoreDirectory = true;
@@ -143,7 +143,7 @@ namespace NameCompares
             {
                 using (System.IO.StreamWriter sw = new System.IO.StreamWriter(savefile.FileName)) { }
 
-                newDirectoryPath = savefile.FileName;
+                string newDirectoryPath = savefile.FileName;
 
                 dataGridViewTempTable.SelectAll();
 
@@ -153,7 +153,7 @@ namespace NameCompares
 
                 ////File.WriteAllText(newDirectoryPath, string.Join("\n", hsWords));
             }
-            return newDirectoryPath;
+            //return newDirectoryPath;
         }
     }
 }

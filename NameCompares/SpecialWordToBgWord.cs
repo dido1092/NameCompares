@@ -22,7 +22,7 @@ namespace NameCompares
         public override bool Equals(object? obj)
         {
             var word = obj as SpecialWordToBgWord;
-            return word!.SpecialWord == this.BgWord;
+            return word!.SpecialWord == this.SpecialWord;
         }
         public override int GetHashCode()
         {

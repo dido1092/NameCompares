@@ -144,7 +144,7 @@
             // 
             // buttonRefresh
             // 
-            buttonRefresh.Location = new Point(1140, 23);
+            buttonRefresh.Location = new Point(1140, 28);
             buttonRefresh.Name = "buttonRefresh";
             buttonRefresh.Size = new Size(102, 37);
             buttonRefresh.TabIndex = 3;
@@ -174,7 +174,7 @@
             // buttonTruncate
             // 
             buttonTruncate.BackColor = Color.IndianRed;
-            buttonTruncate.Location = new Point(995, 23);
+            buttonTruncate.Location = new Point(950, 28);
             buttonTruncate.Name = "buttonTruncate";
             buttonTruncate.Size = new Size(116, 37);
             buttonTruncate.TabIndex = 6;
@@ -215,7 +215,7 @@
             Controls.Add(textBoxQuery);
             Controls.Add(dataGridViewTempTable);
             Name = "FrmResultTable";
-            Text = "Result Table";
+            Text = "Names Table";
             ((System.ComponentModel.ISupportInitialize)dataGridViewTempTable).EndInit();
             ((System.ComponentModel.ISupportInitialize)resultTableBindingSource).EndInit();
             ((System.ComponentModel.ISupportInitialize)temporaryTableBindingSource).EndInit();
